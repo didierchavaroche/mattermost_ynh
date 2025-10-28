@@ -23,6 +23,23 @@ fi
 chown -R $app:www-data "$install_dir"
 
 #=================================================
+# INSTALL EXTRA PLUGINS
+#=================================================
+ynh_script_progression "Installing extra plugins..."
+
+ynh_safe_rm path_to_remove $install_dir/plugins/playbooks
+
+ynh_setup_source --dest_dir="$install_dir/plugins" --source_id="playbooks"
+
+if [[ $focalboards -eq 1 ]];then
+  ynh_setup_source --dest_dir="$install_dir/plugins" --source_id="focalboards"
+fi
+
+if [[ $agents -eq 1 ]];then
+  ynh_setup_source --dest_dir="$install_dir/plugins" --source_id="aiagents"
+fi
+
+#=================================================
 # MODIFY A CONFIG FILE
 #=================================================
 ynh_script_progression "Updating configuration..."
@@ -68,19 +85,6 @@ ynh_hide_warnings sudo --preserve-env -u $app "$install_dir/bin/mmctl" team user
 
 # Disable mmctl passwordless access
 #ynh_replace --match='"EnableLocalMode": true' --replace='"EnableLocalMode": false' --file="$install_dir/config/config.json"
-
-#=================================================
-# CREATE ADMIN AND FIRST TEAM
-#=================================================
-ynh_script_progression "Installing extra plugins..."
-
-if [[ $focalboards -eq 1 ]];then
-  ynh_setup_source --dest_dir="$install_dir/plugins" --source_id="focalboards"
-fi
-
-if [[ $agents -eq 1 ]];then
-  ynh_setup_source --dest_dir="$install_dir/plugins" --source_id="aiagents"
-fi
 
 #=================================================
 # END OF SCRIPT

@@ -113,6 +113,12 @@ ram.runtime = "50M"
         arm64.url = "https://github.com/mattermost/mattermost-plugin-agents/releases/download/v1.4.0/mattermost-plugin-agents-v1.4.0-linux-arm64.tar.gz"
         arm64.sha256 = "f1221bdd8a881e5ccb374949c7e849c48d6610b43e2ec9c79e46a0e38381ce66"
 
+        [resources.sources.playbooks]
+        amd64.url = "https://github.com/mattermost/mattermost-plugin-playbooks/releases/download/v1.41.1/mattermost-plugin-playbooks-v1.41.1-linux-amd64.tar.gz"
+        amd64.sha256 = "8dc7c6fefd7e163ec838c6e226cc69bffb761ccc9b24ff3c461ecfb449c1fbb6"
+        arm64.url = "https://github.com/mattermost/mattermost-plugin-playbooks/releases/download/v1.41.1/mattermost-plugin-playbooks-v1.41.1-linux-arm64.tar.gz"
+        arm64.sha256 = "6d898ad6e2d36a4fe0161695e9c7681b39a096895a3e634ae6674c26864e6f14"
+
     [resources.system_user]
     allow_email = true
 

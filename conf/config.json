@@ -631,7 +631,7 @@
     },
     "EnableMarketplace": true,
     "EnableRemoteMarketplace": true,
-    "AutomaticPrepackagedPlugins": true,
+    "AutomaticPrepackagedPlugins": false,
     "RequirePluginSignature": false,
     "MarketplaceURL": "https://api.integrations.mattermost.com",
     "SignaturePublicKeyFiles": [],
