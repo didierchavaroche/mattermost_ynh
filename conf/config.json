@@ -100,7 +100,7 @@
     "PersistentNotificationMaxRecipients": 5,
     "EnableAPIChannelDeletion": false,
     "EnableLocalMode": true,
-    "LocalModeSocketLocation": "/var/run/__APP__/mattermost_local.socket",
+    "LocalModeSocketLocation": "/run/__APP__/mattermost_local.socket",
     "EnableAWSMetering": false,
     "SplitKey": "",
     "FeatureFlagSyncIntervalSeconds": 30,

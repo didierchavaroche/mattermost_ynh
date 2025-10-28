@@ -27,7 +27,7 @@ chown -R $app:www-data "$install_dir"
 #=================================================
 ynh_script_progression "Updating configuration..."
 
-ynh_config_add --template="config.json" --destination="$install_dir/config/config.json"
+ynh_config_add --template="../conf/config.json" --destination="$install_dir/config/config.json"
 
 #=================================================
 # SYSTEM CONFIGURATION
@@ -60,27 +60,31 @@ ynh_script_progression "Create the first administrator and team..."
 team_name=$(echo "$team_display_name" | iconv -f utf8 -t ascii//TRANSLIT//IGNORE | sed -e 's/[^[:alnum:]]/-/g' | tr -s '-' | tr A-Z a-z)
 
 export MMCTL_LOCAL=true
-export MMCTL_LOCAL_SOCKET_PATH="/var/run/${app}/mattermost_local.socket"
+export MMCTL_LOCAL_SOCKET_PATH="/run/${app}/mattermost_local.socket"
 
 ynh_hide_warnings sudo --preserve-env -u $app "$install_dir/bin/mmctl" user create --username "$admin" --email "$email" --password "$password" --locale "$language" --email-verified --system-admin
 ynh_hide_warnings sudo --preserve-env -u $app "$install_dir/bin/mmctl" team create --name "$team_name" --display_name "$team_display_name" --email "$email"
 ynh_hide_warnings sudo --preserve-env -u $app "$install_dir/bin/mmctl" team users add "$team_name" "$admin"
 
 # Disable mmctl passwordless access
-ynh_replace --match='"EnableLocalMode": true' --replace='"EnableLocalMode": false' --file="$install_dir/config/config.json"
-ynh_systemctl --service=$app --action=restart --log_path=systemd
+#ynh_replace --match='"EnableLocalMode": true' --replace='"EnableLocalMode": false' --file="$install_dir/config/config.json"
 
 #=================================================
 # CREATE ADMIN AND FIRST TEAM
 #=================================================
-ynh_script_progression "Installing focalBoards..."
+ynh_script_progression "Installing extra plugins..."
 
-if [ $focalboards -eq 1 ];then
-  install_focalboards
+if [[ $focalboards -eq 1 ]];then
+  ynh_setup_source --dest_dir="$install_dir/plugins" --source_id="focalboards"
+fi
+
+if [[ $agents -eq 1 ]];then
+  ynh_setup_source --dest_dir="$install_dir/plugins" --source_id="aiagents"
 fi
 
 #=================================================
 # END OF SCRIPT
 #=================================================
+ynh_systemctl --service=$app --action=restart --log_path=systemd
 
 ynh_script_progression "Installation of $app completed"
