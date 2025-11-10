@@ -31,8 +31,8 @@ ynh_safe_rm path_to_remove $install_dir/plugins/playbooks
 
 ynh_setup_source --dest_dir="$install_dir/plugins" --source_id="playbooks"
 
-if [[ $focalboards -eq 1 ]];then
-  ynh_setup_source --dest_dir="$install_dir/plugins" --source_id="focalboards"
+if [[ $focalboard -eq 1 ]];then
+  ynh_setup_source --dest_dir="$install_dir/plugins" --source_id="focalboard"
 fi
 
 if [[ $agents -eq 1 ]];then
@@ -82,8 +82,8 @@ ynh_hide_warnings sudo --preserve-env -u $app "$install_dir/bin/mmctl" user crea
 ynh_hide_warnings sudo --preserve-env -u $app "$install_dir/bin/mmctl" team create --name "$team_name" --display_name "$team_display_name" --email "$email"
 ynh_hide_warnings sudo --preserve-env -u $app "$install_dir/bin/mmctl" team users add "$team_name" "$admin"
 
-if [[ $focalboards -eq 1 ]];then
-  ynh_hide_warnings sudo --preserve-env -u $app "$install_dir/bin/mmctl" plugin enable focalboards
+if [[ $focalboard -eq 1 ]];then
+  ynh_hide_warnings sudo --preserve-env -u $app "$install_dir/bin/mmctl" plugin enable focalboard
 fi
 
 if [[ $agents -eq 1 ]];then
