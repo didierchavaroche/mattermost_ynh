@@ -82,6 +82,8 @@ ynh_hide_warnings sudo --preserve-env -u $app "$install_dir/bin/mmctl" user crea
 ynh_hide_warnings sudo --preserve-env -u $app "$install_dir/bin/mmctl" team create --name "$team_name" --display_name "$team_display_name" --email "$email"
 ynh_hide_warnings sudo --preserve-env -u $app "$install_dir/bin/mmctl" team users add "$team_name" "$admin"
 
+ynh_hide_warnings sudo --preserve-env -u $app "$install_dir/bin/mmctl" plugin enable playbooks
+
 if [[ $focalboard -eq 1 ]];then
   ynh_hide_warnings sudo --preserve-env -u $app "$install_dir/bin/mmctl" plugin enable focalboard
 fi
