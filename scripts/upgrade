@@ -43,8 +43,7 @@ tmpdir="$(mktemp -d)"
 cp -a "$install_dir/config/config.json" "$tmpdir/config.json"
 cp -ar "$install_dir/plugins" "$tmpdir/plugins"
 
-# Remove the app directory securely
-ynh_safe_rm --file="$install_dir"
+
 
 if [ "$version" = "Enterprise" ]; then
   ynh_setup_source --dest_dir="$install_dir" --source_id="enterprise"
@@ -55,6 +54,15 @@ fi
 # Copy the admin saved settings and plugins from tmp directory to final path
 cp -a "$tmpdir/config.json" "$install_dir/config/config.json" 
 cp -ar --no-clobber "$tmpdir/plugins" "$install_dir/"
+
+# Upgrade plugins
+if [[ $focalboards -eq 1 ]];then
+  ynh_setup_source --dest_dir="$install_dir/plugins" --source_id="focalboards" --full_replace=1
+fi
+
+if [[ $agents -eq 1 ]];then
+  ynh_setup_source --dest_dir="$install_dir/plugins" --source_id="aiagents" --full_replace=1
+fi
 
 # Remove the tmp directory securely
 ynh_safe_rm --file="$tmpdir"
@@ -104,6 +112,15 @@ fi
 #=================================================
 # UPGRADE PLUGINS
 #=================================================
+if [[ $focalboards -eq 1 ]];then
+  ynh_safe_rm --file="$install_dir/plugins/focalboards"
+  ynh_setup_source --dest_dir="$install_dir/plugins" --source_id="focalboards"
+fi
+
+if [[ $agents -eq 1 ]];then
+  ynh_safe_rm --file="$install_dir/plugins/aiagents"
+  ynh_setup_source --dest_dir="$install_dir/plugins" --source_id="aiagents"
+fi
 
 #=================================================
 # START SYSTEMD SERVICE
