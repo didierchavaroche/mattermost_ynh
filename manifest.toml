@@ -86,7 +86,7 @@ ram.runtime = "50M"
 
 [resources]
     [resources.apt]
-    packages = ["locales", "postgresql-15", "pgloader"]
+    packages = ["locales", "postgresql-17", "pgloader"]
     
     [resources.sources]
 
