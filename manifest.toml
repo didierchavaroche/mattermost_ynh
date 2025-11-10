@@ -110,7 +110,7 @@ ram.runtime = "50M"
         arm64.url = "https://github.com/mattermost-community/focalboard/releases/download/v8.0.0/mattermost-plugin-focalboard-v8.0.0-linux-arm64.tar.gz"
         arm64.sha256 = "258bc26faf59f4086204811a26d9955395c381a2c2edb10c465778c1ff896e34"
 
-        [resources.sources.mattermost-ai]
+        [resources.sources.agents]
         amd64.url = "https://github.com/mattermost/mattermost-plugin-agents/releases/download/v1.4.0/mattermost-plugin-agents-v1.4.0-linux-amd64.tar.gz"
         amd64.sha256 = "0ec5e3fe172a3f316d0464fda3e832d76fe4bdf7517aab5e4395be8ccc764a4a"
         arm64.url = "https://github.com/mattermost/mattermost-plugin-agents/releases/download/v1.4.0/mattermost-plugin-agents-v1.4.0-linux-arm64.tar.gz"

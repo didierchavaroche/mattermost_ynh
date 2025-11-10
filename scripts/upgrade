@@ -61,7 +61,7 @@ if [[ $focalboards -eq 1 ]];then
 fi
 
 if [[ $agents -eq 1 ]];then
-  ynh_setup_source --dest_dir="$install_dir/plugins" --source_id="aiagents" --full_replace=1
+  ynh_setup_source --dest_dir="$install_dir/plugins" --source_id="agents" --full_replace=1
 fi
 
 # Remove the tmp directory securely
