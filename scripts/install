@@ -76,7 +76,6 @@ ynh_script_progression "Create the first administrator and team..."
 
 team_name=$(echo "$team_display_name" | iconv -f utf8 -t ascii//TRANSLIT//IGNORE | sed -e 's/[^[:alnum:]]/-/g' | tr -s '-' | tr A-Z a-z)
 
-export MMCTL_LOCAL=true
 export MMCTL_LOCAL_SOCKET_PATH="/run/${app}/mattermost_local.socket"
 
 ynh_hide_warnings sudo --preserve-env -u $app "$install_dir/bin/mmctl" user create --username "$admin" --email "$email" --password "$password" --locale "$language" --email-verified --system-admin
