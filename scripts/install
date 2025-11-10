@@ -36,7 +36,7 @@ if [[ $focalboards -eq 1 ]];then
 fi
 
 if [[ $agents -eq 1 ]];then
-  ynh_setup_source --dest_dir="$install_dir/plugins" --source_id="aiagents"
+  ynh_setup_source --dest_dir="$install_dir/plugins" --source_id="mattermost-ai"
 fi
 
 #=================================================
@@ -81,6 +81,14 @@ export MMCTL_LOCAL_SOCKET_PATH="/run/${app}/mattermost_local.socket"
 ynh_hide_warnings sudo --preserve-env -u $app "$install_dir/bin/mmctl" user create --username "$admin" --email "$email" --password "$password" --locale "$language" --email-verified --system-admin
 ynh_hide_warnings sudo --preserve-env -u $app "$install_dir/bin/mmctl" team create --name "$team_name" --display_name "$team_display_name" --email "$email"
 ynh_hide_warnings sudo --preserve-env -u $app "$install_dir/bin/mmctl" team users add "$team_name" "$admin"
+
+if [[ $focalboards -eq 1 ]];then
+  ynh_hide_warnings sudo --preserve-env -u $app "$install_dir/bin/mmctl" plugin enable focalboards
+fi
+
+if [[ $agents -eq 1 ]];then
+  ynh_hide_warnings sudo --preserve-env -u $app "$install_dir/bin/mmctl" plugin enable mattermost-ai
+fi
 
 # Disable mmctl passwordless access
 ynh_replace --match='"EnableLocalMode": true' --replace='"EnableLocalMode": false' --file="$install_dir/config/config.json"
