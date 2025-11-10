@@ -43,8 +43,6 @@ tmpdir="$(mktemp -d)"
 cp -a "$install_dir/config/config.json" "$tmpdir/config.json"
 cp -ar "$install_dir/plugins" "$tmpdir/plugins"
 
-
-
 if [ "$version" = "Enterprise" ]; then
   ynh_setup_source --dest_dir="$install_dir" --source_id="enterprise"
 elif [ "$version" = "Team" ]; then
@@ -57,7 +55,7 @@ cp -ar --no-clobber "$tmpdir/plugins" "$install_dir/"
 
 # Upgrade plugins
 if [[ $focalboards -eq 1 ]];then
-  ynh_setup_source --dest_dir="$install_dir/plugins" --source_id="focalboards" --full_replace=1
+  ynh_setup_source --dest_dir="$install_dir/plugins" --source_id="focalboard" --full_replace=1
 fi
 
 if [[ $agents -eq 1 ]];then
@@ -107,19 +105,6 @@ EOM
 
     # Note: it's possible that some instances need other fixes
     # If nothing is displayed in the sidebar it may be needed to change the Id of SidebarCategories...
-fi
-
-#=================================================
-# UPGRADE PLUGINS
-#=================================================
-if [[ $focalboards -eq 1 ]];then
-  ynh_safe_rm --file="$install_dir/plugins/focalboards"
-  ynh_setup_source --dest_dir="$install_dir/plugins" --source_id="focalboards"
-fi
-
-if [[ $agents -eq 1 ]];then
-  ynh_safe_rm --file="$install_dir/plugins/aiagents"
-  ynh_setup_source --dest_dir="$install_dir/plugins" --source_id="aiagents"
 fi
 
 #=================================================
