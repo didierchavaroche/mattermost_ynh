@@ -29,6 +29,8 @@ ynh_script_progression "Installing extra plugins..."
 
 ynh_safe_rm $install_dir/plugins/playbooks
 
+mkdir -p "$install_dir/plugins"
+
 ynh_setup_source --dest_dir="$install_dir/plugins" --source_id="playbooks"
 
 if [[ $focalboard -eq 1 ]];then
@@ -89,7 +91,7 @@ if [[ $focalboard -eq 1 ]];then
 fi
 
 if [[ $agents -eq 1 ]];then
-  ynh_hide_warnings sudo --preserve-env -u $app "$install_dir/bin/mmctl" plugin enable agents
+  ynh_hide_warnings sudo --preserve-env -u $app "$install_dir/bin/mmctl" plugin enable mattermost-ai
 fi
 
 # Disable mmctl passwordless access
