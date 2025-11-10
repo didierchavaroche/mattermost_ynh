@@ -86,7 +86,7 @@ ram.runtime = "50M"
 
 [resources]
     [resources.apt]
-    packages = "postgresql-15, pgloader"
+    packages = ["postgresql-15", "pgloader"]
     
     [resources.sources]
 
