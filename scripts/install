@@ -10,6 +10,11 @@ source /usr/share/yunohost/helpers
 email=$(ynh_user_get_info --username=$admin --key=mail)
 
 #=================================================
+# INSTALL APP DEPENDENCIES
+#=================================================
+ynh_install_app_dependencies
+
+#=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 ynh_script_progression "Setting up source files..."

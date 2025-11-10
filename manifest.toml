@@ -85,6 +85,9 @@ ram.runtime = "50M"
     default = false
 
 [resources]
+    [resources.apt]
+    packages = "postgresql-15, pgloader"
+    
     [resources.sources]
 
         [resources.sources.main]
@@ -140,9 +143,6 @@ ram.runtime = "50M"
     playbooks.url = "/playbooks"
     playbooks.show_tile = true
     playbooks.allowed = "visitors"
-
-    [resources.apt]
-    packages = "postgresql-15, pgloader"
 
     [resources.database]
     type = "postgresql"
