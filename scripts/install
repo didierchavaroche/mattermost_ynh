@@ -20,8 +20,6 @@ elif [ "$version" = "Team" ]; then
   ynh_setup_source --dest_dir="$install_dir" --source_id="main"
 fi
 
-chown -R $app:www-data "$install_dir"
-
 #=================================================
 # INSTALL EXTRA PLUGINS
 #=================================================
@@ -40,6 +38,8 @@ fi
 if [[ $agents -eq 1 ]];then
   ynh_setup_source --dest_dir="$install_dir/plugins" --source_id="agents"
 fi
+
+chown -R $app:www-data "$install_dir"
 
 #=================================================
 # MODIFY A CONFIG FILE
