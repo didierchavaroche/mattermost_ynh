@@ -84,7 +84,7 @@ ynh_hide_warnings sudo --preserve-env -u $app "$install_dir/bin/mmctl" team crea
 ynh_hide_warnings sudo --preserve-env -u $app "$install_dir/bin/mmctl" team users add "$team_name" "$admin"
 
 # Disable mmctl passwordless access
-#ynh_replace --match='"EnableLocalMode": true' --replace='"EnableLocalMode": false' --file="$install_dir/config/config.json"
+ynh_replace --match='"EnableLocalMode": true' --replace='"EnableLocalMode": false' --file="$install_dir/config/config.json"
 
 #=================================================
 # END OF SCRIPT
